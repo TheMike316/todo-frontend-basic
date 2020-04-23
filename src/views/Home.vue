@@ -24,13 +24,13 @@
         },
         methods: {
             deleteTodo(id) {
-                axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+                axios.delete(`http://localhost:8090/api/v1/todo/${id}`)
                     .then(() => this.todos = this.todos.filter(t => t.id !== id))
                     .catch(err => console.log(err));
             },
             addTodo(newTodo) {
                 const {title, completed} = newTodo;
-                axios.post('https://jsonplaceholder.typicode.com/todos', {
+                axios.post('http://localhost:8090/api/v1/todo', {
                     title,
                     completed
                 })
@@ -39,7 +39,7 @@
             }
         },
         created() {
-            axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+            axios.get('http://localhost:8090/api/v1/todo')
                 .then(res => this.todos = res.data)
                 .catch(e => console.log(e));
         }
