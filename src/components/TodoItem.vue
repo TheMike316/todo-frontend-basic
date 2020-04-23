@@ -1,7 +1,7 @@
 <template>
     <div class="todo-item" :class="{'is-complete': todo.completed}">
         <p>
-            <input type="checkbox" v-model="todo.completed"/>
+            <input type="checkbox" v-model="todo.completed" @change="$emit('completed', todo)"/>
             {{todo.title}}
             <button @click="$emit('del-todo', todo.id)" class="del">X</button>
         </p>

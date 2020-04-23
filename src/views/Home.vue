@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <AddTodo @add-todo="addTodo"/>
-        <Todos :todos="todos" @del-todo="deleteTodo"/>
+        <Todos :todos="todos" @completed="updateTodo" @del-todo="deleteTodo"/>
     </div>
 </template>
 
@@ -23,6 +23,19 @@
             }
         },
         methods: {
+            updateTodo(todo) {
+                const request = {
+                    title: todo.title,
+                    completed: todo.completed
+                }
+
+                axios.put(`http://localhost:8090/api/v1/todo/${todo.id}`, request)
+                    .then(res => {
+                        const index = this.todos.findIndex(t => t.id === res.data.id);
+                        this.todos[index] = res.data;
+                    })
+                    .catch(err => console.log(err))
+            },
             deleteTodo(id) {
                 axios.delete(`http://localhost:8090/api/v1/todo/${id}`)
                     .then(() => this.todos = this.todos.filter(t => t.id !== id))
