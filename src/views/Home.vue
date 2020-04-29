@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <AddTodo @add-todo="addTodo"/>
-        <Todos :todos="todos" @completed="updateTodo" @del-todo="deleteTodo"/>
+        <Todos :todos="allTodos" @completed="updateTodo" @del-todo="deleteTodo"/>
     </div>
 </template>
 
@@ -9,7 +9,7 @@
     import Todos from "../components/Todos";
     import AddTodo from "../components/AddTodo";
 
-    import {mapActions} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         name: 'Home',
@@ -17,11 +17,7 @@
             AddTodo,
             Todos
         },
-        data() {
-            return {
-                todos: []
-            }
-        },
+        computed: mapGetters(['allTodos']),
         methods: {
             ...mapActions(['fetchTodos', 'addTodo', 'updateTodo', 'deleteTodo']),
         },
