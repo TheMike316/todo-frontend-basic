@@ -6,10 +6,10 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     import Todos from "../components/Todos";
     import AddTodo from "../components/AddTodo";
+
+    import {mapActions} from 'vuex'
 
     export default {
         name: 'Home',
@@ -23,38 +23,10 @@
             }
         },
         methods: {
-            updateTodo(todo) {
-                const request = {
-                    title: todo.title,
-                    completed: todo.completed
-                }
-
-                axios.put(`http://localhost:8090/api/v1/todo/${todo.id}`, request)
-                    .then(res => {
-                        const index = this.todos.findIndex(t => t.id === res.data.id);
-                        this.todos[index] = res.data;
-                    })
-                    .catch(err => console.log(err))
-            },
-            deleteTodo(id) {
-                axios.delete(`http://localhost:8090/api/v1/todo/${id}`)
-                    .then(() => this.todos = this.todos.filter(t => t.id !== id))
-                    .catch(err => console.log(err));
-            },
-            addTodo(newTodo) {
-                const {title, completed} = newTodo;
-                axios.post('http://localhost:8090/api/v1/todo', {
-                    title,
-                    completed
-                })
-                    .then(res => this.todos = [...this.todos, res.data])
-                    .catch(err => console.log(err));
-            }
+            ...mapActions(['fetchTodos', 'addTodo', 'updateTodo', 'deleteTodo']),
         },
         created() {
-            axios.get('http://localhost:8090/api/v1/todo')
-                .then(res => this.todos = res.data)
-                .catch(e => console.log(e));
+            this.fetchTodos();
         }
     }
 </script>

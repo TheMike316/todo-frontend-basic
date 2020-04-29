@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
-import todos from 'todos.module'
+import todos from './todos.module.js'
 
 
 //Load Vuex
