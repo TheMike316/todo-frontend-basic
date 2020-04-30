@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {authHeader} from "../_helpers";
 
 export const todoService = {
     getAll,
@@ -13,11 +14,11 @@ function updateTodo(todo) {
         completed: todo.completed
     }
 
-    return axios.put(`http://localhost:8090/api/v1/todo/${todo.id}`, request);
+    return axios.put(`http://localhost:8090/api/v1/todo/${todo.id}`, request, {headers: authHeader()});
 }
 
 function deleteTodo(id) {
-    return axios.delete(`http://localhost:8090/api/v1/todo/${id}`);
+    return axios.delete(`http://localhost:8090/api/v1/todo/${id}`, {headers: authHeader()});
 }
 
 function addTodo(newTodo) {
@@ -25,9 +26,9 @@ function addTodo(newTodo) {
     return axios.post('http://localhost:8090/api/v1/todo', {
         title,
         completed
-    })
+    }, {headers: authHeader()})
 }
 
 function getAll() {
-    return axios.get('http://localhost:8090/api/v1/todo')
+    return axios.get('http://localhost:8090/api/v1/todo', {headers: authHeader()})
 }
