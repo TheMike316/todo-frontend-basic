@@ -3,15 +3,15 @@ import {router} from '../router'
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
-    ? {status: {loggedIn: true}, user}
+    ? {status: {loggedIn: true, loggingIn: false}, user}
     : {status: {}, user: null};
 
 export const authentication = {
     namespaced: true,
     state: initialState,
     getters: {
-        loggedIn: state => !!state.status.loggedIn,
-        loggingIn: state => !!state.status.loggingIn
+        loggedIn: state => state.status.loggedIn,
+        loggingIn: state => state.status.loggingIn
     },
     actions: {
         login({commit}, {username, password}) {

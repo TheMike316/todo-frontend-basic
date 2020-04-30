@@ -14,9 +14,7 @@
 
     export default {
         name: "Header",
-        computed: {
-            loggedIn: () => mapGetters(['authentication/loggedIn'])
-        }
+        computed: mapGetters('authentication', ['loggedIn'])
     }
 </script>
 

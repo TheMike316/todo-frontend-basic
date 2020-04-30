@@ -28,9 +28,7 @@
                 submitted: false
             }
         },
-        computed: {
-            loggingIn: () => mapGetters(['authentication/loggingIn'])
-        },
+        computed: mapGetters('authentication', ['loggingIn']),
         created() {
             // reset login status
             this.$store.dispatch('authentication/logout');
