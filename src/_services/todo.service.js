@@ -45,7 +45,7 @@ function handleResponse(response) {
             if (response.status === 401 || response.status === 403) {
                 // auto logout if 401 response returned from api
                 authService.logout();
-                location.reload();
+                location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;

@@ -4,14 +4,19 @@
         <div id="nav">
             <router-link to="/">Home</router-link>
             <router-link to="/about">About</router-link>
-            <router-link to="/login"></router-link>
+            <router-link to="/login">{{ loggedIn ? 'Logout' : 'Login' }}</router-link>
         </div>
     </header>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
+
     export default {
-        name: "Header"
+        name: "Header",
+        computed: {
+            loggedIn: () => mapGetters(['authentication/loggedIn'])
+        }
     }
 </script>
 

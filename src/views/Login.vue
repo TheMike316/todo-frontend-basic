@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
 
     export default {
         data() {
@@ -28,7 +29,7 @@
             }
         },
         computed: {
-            loggingIn: () => this.$store.state.authentication.status.loggingIn
+            loggingIn: () => mapGetters(['authentication/loggingIn'])
         },
         created() {
             // reset login status

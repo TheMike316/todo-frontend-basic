@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
-import todos from 'todos.module'
-import {authentication} from 'auth.module'
+import todos from './todos.module'
+import {authentication} from './auth.module'
 
 //Load Vuex
 Vue.use(Vuex);
