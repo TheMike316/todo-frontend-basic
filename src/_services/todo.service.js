@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {authService} from "./auth.service";
 import {authHeader} from "../_helpers";
 
 export const todoService = {
@@ -16,12 +15,12 @@ function updateTodo(todo) {
     }
 
     return axios.put(`http://localhost:8090/api/v1/todo/${todo.id}`, request, {headers: authHeader()})
-        .then(handleResponse);
+    // .then(handleResponse);
 }
 
 function deleteTodo(id) {
     return axios.delete(`http://localhost:8090/api/v1/todo/${id}`, {headers: authHeader()})
-        .then(handleResponse);
+    // .then(handleResponse);
 }
 
 function addTodo(newTodo) {
@@ -30,28 +29,29 @@ function addTodo(newTodo) {
         title,
         completed
     }, {headers: authHeader()})
-        .then(handleResponse);
+    // .then(handleResponse);
 }
 
 function getAll() {
     return axios.get('http://localhost:8090/api/v1/todo', {headers: authHeader()})
-        .then(handleResponse);
+    // .then(handleResponse);
 }
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401 || response.status === 403) {
-                // auto logout if 401 response returned from api
-                authService.logout();
-                location.reload(true);
-            }
-
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
-}
+// TODO in case of auth errors, we need to perform a logout
+// function handleResponse(response) {
+//     // return response.text().then(text => {
+//     //     const data = text && JSON.parse(text);
+//     if (!response.ok) {
+//         if (response.status === 401 || response.status === 403) {
+//             // auto logout if 401 response returned from api
+//             authService.logout();
+//             location.reload(true);
+//         }
+//
+//         return Promise.reject(response.statusText);
+//     }
+//     return response;
+//
+//     //     return data;
+//     // });
+// }
