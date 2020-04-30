@@ -1,5 +1,2 @@
-import {todoService} from 'todo.service'
-
-export default {
-    todoService
-}
+export * from 'todo.service'
+export * from 'auth.service'
